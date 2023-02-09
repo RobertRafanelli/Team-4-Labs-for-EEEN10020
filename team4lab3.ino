@@ -23,9 +23,8 @@ int M2 = 7;    //Port for M2 Direction Control
 
 void setup(){ //this code executes once at start
 int b;
-
-  Wire.begin();
-
+   
+Wire.begin();
 
 pinMode(E1, OUTPUT);    //These pins control the motor H-bridge circuitry, so we need to set them up as outputs
 pinMode(E2, OUTPUT);
@@ -50,6 +49,8 @@ while(b == 15)    // A value of 15 will only be seen if no buttons are pressed
 // We want execution to get "trapped" in the above loop: otherwise, the programme would turn on the motors straigh away, and your robot might go sailing off the bench!
 }
 
+int display_delay = delay(5000) // Gives us time to observe the data displayed on the lcd screen 
+
 int dist_read = analogRead(A3);    // Set variable for read from distance sensor
 int dist_val = 24 //This is the output from the distance sensor when an object is 10cm away
 
@@ -57,6 +58,14 @@ int opt_state = 0, rot_count =0;
 int black_val = 250;  // Defines the difference between black and non black colours read from optical sensor
 
 int dist_map = map(dist_read,0,1023,0,100);    // Defines variable for read from distance sensor on a more intuitive scale (0-100)
+
+int optval =analogRead(A0);     // Sets variable for optical sensor reading
+
+int rotatCounted = 0; //Sets up a variable to prevent looping of rotation counting.
+
+int distState = 0;
+
+int distTested == 0;
 
 void forward(int speed){    // Function for forward travel
   analogWrite (E1,speed);     //Set M1 speed
@@ -74,18 +83,15 @@ void reverse(int speed){     // Function for reverse travel
   digitalWrite(M2,LOW);     //Set M2 speed
 }
 
- void stop(){
+void stop(){ // Stops the motors entirely by utilizing the forward function and setting it to zero
   forward(0);
-  }
+}
   
 void lcdwrite(int count){    // Define function for writing text to lcd
     lcd.lcdWrite(count);     // Writes to lcd that black tape detected
     delay(500);           // sets a delay so that the value is readable
     lcd.lcdClear();     // Clears LCD
 }
-
-
-int optval =analogRead(A0);     // Sets variable for optical sensor reading
 
 void rotatCount(int time){//This function spins the motors for a certain period of time to allow us to count the number of rotations.
   
@@ -104,10 +110,6 @@ void rotatCount(int time){//This function spins the motors for a certain period 
   stop();
 }
 
-int rotatCounted = 0; //Sets up a variable to prevent looping of rotation counting.
-
-int distState = 0;
-
 void distTest(){
   forward(250);
   if(dist_read < dist_val && distState == 0){ //Checks if the sensor has detected an object 10cm away
@@ -119,15 +121,14 @@ void distTest(){
   }
 }
 
-int distTested == 0;
-
 void loop(){
-  
+  // Goal of this challenge (Challenge #3) is to drive slowly towards the wall, stop when it's at 10cm away, and then reverse 20cm 
   if(rotatCounted == 0){ // Checks to ensure the rotations have not been counted yet
     rotatCount(10000); // Counts the number of rotations for 10 seconds
     lcd.lcdClear(); //Clears the LCD
     lcd.lcdGoToXY(1,2);
     lcdwrite(rot_count);  // Displays rotation count
+    display_delay; // 5 seconds of time to observe data
     rotatCounted == 1; //Prevents the rotations from being counted multiple times
   }
 
@@ -139,8 +140,7 @@ void loop(){
     distTested == 1; //Prevents the test from looping
   }
 
-
-  }
+}
 
 
 
