@@ -1,10 +1,19 @@
 // Group 4 lab 3 Report - Robert Rafanelli, Hugh Fitzpatrick and Amelie Cojocaru
 // We focused our efforts in this lab on improving the structural integrity of our robot and writing a working script for the assigned challenge. 
+// We started from the ground up, and emphasized accomodation for the PSU, the Arduino, possible Gear Trains, and bracing assemblies. Ensuring the possibility for future modularity took precedence as well.
 // We used building techniques shown to us at the start of the lab to improve the integrity of our robot and prevent it from breaking as the motors spun.
-// In the meantime, we also created a script to count the number of rotations of an output gear that we connected to the drivetrain through a small spur gear.
+// We retained the re-purposed axel sent through the bottom for support, despite advisement against it, due to tests that applied pressure to the Arduino displaying utility in providing structural support across the middle. No functional fixedness with Team 4!
+// From our newly supported base, we improved our third wheel assembly with added support and superior positioning relative to its position. Tension was increased for the tracks, and the robot manuevered because of it.
+// The motor was a priority in our redesign, and properly securing it to the rest of the machine ensured that the coming gear train functioned properly, and that the robots most integral component was secure.
+// We leveled out all of vertical stages of the robot from the ground up, and supported each stage with the fastening technique. This leveled out positioning enabled the Arduino module to sit on a level plane with optimal security.
+// In the meantime, we also created a script to count the number of rotations of an output gear that we connected to the primary motor's gear to create a gear train
+// This new geartrain was integrated into the front assmebly of the robot, and was secured utilizing a series of axels fed through Technic bricks and was supplemented by additional fastening support along the side assembly. 
+// One flaw however in our geartrain design was the lack of technic bricks on the other side of the gears. Although there were technic bricks to support the axels and gears being mounted, the assembly was lodged against the rest of the machine (primarily the PSU).
+// As a consequence of this, the smaller gear that was used to connect the motor gear and the large gear (the large gear is the one being used to count rotations) would fall through if the axel came undone. This was a frequent occurence because the gear is not machined to fit to a technic axel, and is instead just rounded.
 // A piece of black tape was placed on this gear, and an optical sensor was used to detect when this black tape had completed one full rotation.
 // Rising edge detection had to be used to prevent the function from looping and not counting the correct amount of rotations.
 // We also cleaned up our code from the previous weeks by creating functions for code that was being used repeatedly.
+// In addition to standard code garbage disposal, we organized the code into a comprehensible structure as opposed to having variables and functions declared irrespective of code position.
 // Using our new robot design, we then affixed a distance sensor and got to work with creating a script to make use of this new hardware.
 // Unfortunately we did not get this fully working in time however the code has since been amended and we believe that this script should work correctly once uploaded.
 #include <LCD16x2.h> //allows us to use the little LCD at the top
